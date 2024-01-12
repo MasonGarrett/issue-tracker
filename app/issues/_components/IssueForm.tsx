@@ -9,7 +9,7 @@ import axios from 'axios';
 import 'easymde/dist/easymde.min.css';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -31,6 +31,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
     });
     const [error, setError] = useState('');
     const [isSubmitting, setSubmitting] = useState(false);
+    const ref = useRef();
 
     const onSubmit = handleSubmit(async (data) => {
         try {
@@ -63,12 +64,13 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
 
                 <Controller
                     name="description"
+                    defaultValue={issue?.description}
                     control={control}
                     render={({ field }) => (
                         <SimpleMDE
-                            defaultValue={issue?.description}
                             placeholder="Description"
                             {...field}
+                            ref={ref.current}
                         />
                     )}
                 />
