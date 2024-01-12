@@ -45,4 +45,13 @@ const IssuesPage = async () => {
     );
 };
 
+/*
+    By default, routes without paramaters are rendered statically and will never
+    refresh unless the server is restarted.
+    To change this behavior, we export the following.
+    Now by default the list of issues will refresh every 30 seconds, on refresh,
+    or after we create/edit an issue. 
+*/
+export const dynamic = 'force-dynamic';
+
 export default IssuesPage;
