@@ -7,7 +7,6 @@ const IssuesPage = async () => {
 
     return (
         <div>
-            <IssueActions />
             <Table.Root variant="surface">
                 <Table.Header>
                     <Table.Row>
@@ -41,6 +40,7 @@ const IssuesPage = async () => {
                     ))}
                 </Table.Body>
             </Table.Root>
+            <IssueActions />
         </div>
     );
 };
