@@ -7,6 +7,7 @@ interface Props {
     inProgress: number;
     closed: number;
 }
+
 const IssueSummary = ({ open, inProgress, closed }: Props) => {
     const containers: { label: string; value: number; status: Status }[] = [
         { label: 'Open Issues', value: open, status: 'OPEN' },
