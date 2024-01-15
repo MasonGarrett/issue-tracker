@@ -11,6 +11,7 @@ interface Props {
 }
 
 const IssuesPage = async ({ searchParams }: Props) => {
+    // Column Headers
     const columns: { label: string; value: keyof Issue; className?: string }[] =
         [
             { label: 'Issue', value: 'title' },
@@ -26,15 +27,25 @@ const IssuesPage = async ({ searchParams }: Props) => {
             },
         ];
 
+    // Status filter options
     const statuses = Object.values(Status);
     const status = statuses.includes(searchParams.status)
         ? searchParams.status
         : undefined;
 
+    // Column sort options
+    const orderBy = columns
+        .map((column) => column.value)
+        .includes(searchParams.orderBy)
+        ? { [searchParams.orderBy]: 'asc' }
+        : undefined;
+
+    // Query issues with applied filters
     const issues = await prisma.issue.findMany({
         where: {
             status,
         },
+        orderBy,
     });
 
     return (
